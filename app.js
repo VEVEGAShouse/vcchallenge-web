@@ -265,8 +265,8 @@
       panes.forEach(function (p) { p.classList.toggle('is-on', p.dataset.pane === name); });
     }
     tabs.forEach(function (t) { t.addEventListener('click', function () { show(t.dataset.tab); }); });
-    function reset() { done.hidden = true; dlg.querySelector('.hi__tabs').hidden = false; show('note'); }
-    function thanks() { panes.forEach(function (p) { p.classList.remove('is-on'); }); dlg.querySelector('.hi__tabs').hidden = true; done.hidden = false; }
+    function reset() { done.hidden = true; dlg.querySelector('.hi__tabs').hidden = false; dlg.querySelector('.hi__mail').hidden = false; show('note'); }
+    function thanks() { panes.forEach(function (p) { p.classList.remove('is-on'); }); dlg.querySelector('.hi__tabs').hidden = true; dlg.querySelector('.hi__mail').hidden = true; done.hidden = false; }
     function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
     // a note: one email field, sent without leaving the page
