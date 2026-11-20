@@ -10,8 +10,8 @@
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -94,7 +94,7 @@
         <p class="who__p reveal">Today she builds new ideas at <a href="https://fronttier.io" target="_blank" rel="noopener">FRONTTIER</a> and thinks out loud at <a href="https://vevegas.com" target="_blank" rel="noopener">House of Thought</a>.</p>
       </div>
       <div class="who__cta reveal">
-        <a class="btn btn--lime" href="mailto:hello@vevegas.com?subject=Let%E2%80%99s%20build%20something%20like%20VC%20Challenge">Work with Virginia →</a>
+        <button type="button" class="btn btn--lime" data-hi>Come say hi →</button>
         <a class="btn btn--ghost" href="https://vevegas.com" target="_blank" rel="noopener">vevegas.com ↗</a>
       </div>
     </div>
@@ -139,8 +139,8 @@
       <p class="end__big reveal">The challenge<br>is over.</p>
       <p class="end__big end__big--b reveal"><span>The funds<br>are investing.</span></p>
       <div class="end__call reveal">
-        <p class="end__q">Want to build something this bold?</p>
-        <a class="btn btn--ink" href="mailto:hello@vevegas.com?subject=Let%E2%80%99s%20build%20something%20like%20VC%20Challenge">Talk to Virginia E. Vegas →</a>
+        <p class="end__q"><span class="hand">Who made this?</span> A human. Come say hi.</p>
+        <button type="button" class="btn btn--ink" data-hi>Say hi to Virginia →</button>
       </div>
     </div>
   </section>
@@ -150,13 +150,26 @@
     <span>2020 — 2024</span>
   </footer>
 
-  <a class="dock" id="dock" data-theme="ink" href="mailto:hello@vevegas.com?subject=Let%E2%80%99s%20build%20something%20like%20VC%20Challenge">
-    <span class="dock__by"><i></i>Conceived by <b>Virginia E. Vegas</b></span>
-    <span class="dock__go">Work with her →</span>
-  </a>
+  <button class="dock" id="dock" data-theme="ink" type="button" data-hi aria-haspopup="dialog">
+    <span class="dock__note">Hi, I’m Virginia.<br><span>A human made this.</span></span>
+    <span class="dock__go">say hi</span>
+  </button>
+
+  <dialog class="hi" id="hi" aria-labelledby="hiT">
+    <form method="dialog"><button class="hi__x" aria-label="Close">×</button></form>
+    <p class="hi__hand" id="hiT">Curious? Come say hi.</p>
+    <p class="hi__lead">No pitch, no project needed. Curiosity is reason enough. Pick whatever feels easiest for you:</p>
+    <ol class="hi__opts">
+      <li><a id="optChat" href="mailto:hello@vevegas.com?subject=Coffee%20chat%3F" target="_blank" rel="noopener"><span class="hi__n">1</span><span><b>A 30-minute chat</b><small>Pick a slot in my calendar. Coffee optional.</small></span></a></li>
+      <li><a href="mailto:hello@vevegas.com?subject=A%20voice%20note%20for%20Virginia&body=Record%20a%20voice%20memo%20on%20your%20phone%20and%20attach%20it%20here.%20As%20long%20or%20short%20as%20you%20like." target="_blank" rel="noopener"><span class="hi__n">2</span><span><b>A voice note</b><small>Talk, don’t type. Send it whenever.</small></span></a></li>
+      <li><a href="mailto:hello@vevegas.com?subject=Hi%20Virginia" target="_blank" rel="noopener"><span class="hi__n">3</span><span><b>A few lines</b><small>As much or as little as you like.</small></span></a></li>
+      <li><a href="mailto:hello@vevegas.com?subject=Something%20I%20made&body=Attach%20it%20here%3A%20a%20file%2C%20a%20deck%2C%20a%20link%2C%20a%20doodle." target="_blank" rel="noopener"><span class="hi__n">4</span><span><b>Something you made</b><small>A file, a link, a sketch, a crazy idea.</small></span></a></li>
+    </ol>
+    <p class="hi__sig">— V.</p>
+  </dialog>
 
   <div class="cursor" id="cursor" aria-hidden="true"></div>
 
-  <script src="app.js?v=4" defer></script>
+  <script src="app.js?v=5" defer></script>
 </body>
 </html>

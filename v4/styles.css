@@ -162,3 +162,30 @@ mark { background: var(--lime); color: var(--ink); padding: 0 .1em; box-decorati
 .cursor { position: fixed; z-index: 50; top: 0; left: 0; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--lime); mix-blend-mode: difference; pointer-events: none; transition: width .25s, height .25s, margin .25s; }
 .cursor.big { width: 64px; height: 64px; margin: -32px 0 0 -32px; }
 @media (hover: none) { .cursor { display: none; } }
+
+/* ===== the human layer ===== */
+:root { --hand: "Caveat", "Segoe Print", cursive; --paper: #f7f4ec; }
+.hand { font-family: var(--hand); font-weight: 700; font-size: 1.25em; letter-spacing: 0; }
+button.btn { border: 0; cursor: pointer; font-family: var(--sans); }
+.dock { border: 0; cursor: pointer; font-family: var(--sans); padding: 0; transform: rotate(-1.5deg); }
+.dock:hover { transform: rotate(0) translateY(-3px); }
+.dock__note { display: block; padding: 8px 16px 9px 18px; font-family: var(--hand); font-weight: 700; font-size: 21px; line-height: .95; text-align: left; }
+.dock__note span { font-weight: 500; font-size: 17px; opacity: .8; }
+.dock__go { align-self: stretch; display: flex; align-items: center; font-family: var(--hand); font-size: 24px; font-weight: 700; padding: 0 20px; }
+.dock__by { display: none; }
+
+.hi { width: min(560px, calc(100vw - 32px)); border: 0; padding: clamp(26px, 4vw, 40px); background: var(--paper); color: var(--ink); box-shadow: 14px 14px 0 var(--lime), 0 40px 80px -30px rgba(0,0,0,.6); transform: rotate(-.8deg);
+  background-image: repeating-linear-gradient(transparent 0 31px, rgba(11,13,16,.07) 31px 32px); }
+.hi::backdrop { background: rgba(11,13,16,.55); backdrop-filter: blur(3px); }
+.hi[open] { animation: hiIn .45s var(--ease); }
+@keyframes hiIn { from { opacity: 0; transform: rotate(-4deg) translateY(30px) scale(.96); } }
+.hi__x { position: absolute; top: 10px; right: 14px; border: 0; background: none; font: 400 30px/1 var(--hand); cursor: pointer; color: var(--ink); }
+.hi__hand { font-family: var(--hand); font-weight: 700; font-size: clamp(40px, 6vw, 56px); line-height: .95; margin-bottom: 14px; }
+.hi__lead { font-size: 16px; line-height: 1.45; color: #3a4046; margin-bottom: 18px; }
+.hi__opts { display: grid; gap: 8px; }
+.hi__opts a { display: flex; gap: 14px; align-items: center; padding: 12px 14px; text-decoration: none; border: 1.5px solid var(--ink); background: #fff; transition: background .25s, transform .3s var(--ease); }
+.hi__opts a:hover { background: var(--lime); transform: translateX(6px) rotate(-.5deg); }
+.hi__opts b { display: block; font-size: 17px; letter-spacing: -0.01em; }
+.hi__opts small { display: block; font-size: 14px; color: #555c63; }
+.hi__n { font-family: var(--hand); font-size: 30px; font-weight: 700; width: 22px; text-align: center; }
+.hi__sig { font-family: var(--hand); font-size: 34px; font-weight: 700; text-align: right; margin-top: 10px; transform: rotate(-4deg); }

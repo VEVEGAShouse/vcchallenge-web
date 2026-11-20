@@ -227,6 +227,17 @@
     (function loop() { cx += (x - cx) * .25; cy += (y - cy) * .25; c.style.transform = 'translate(' + cx + 'px,' + cy + 'px)'; requestAnimationFrame(loop); })();
   })();
 
+  /* ================= SAY HI ================= */
+  (function () {
+    var CALENDLY = ''; // paste the 30-min Calendly link here
+    var dlg = document.getElementById('hi');
+    if (CALENDLY) { var o = document.getElementById('optChat'); o.href = CALENDLY; }
+    document.querySelectorAll('[data-hi]').forEach(function (b) {
+      b.addEventListener('click', function () { if (dlg.showModal) dlg.showModal(); else window.location.href = 'mailto:hello@vevegas.com'; });
+    });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  })();
+
   /* ================= REVEAL + PLATE ================= */
   var els = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
