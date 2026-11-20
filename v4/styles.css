@@ -235,7 +235,7 @@ html[data-pal="punk"] .who__name span:last-child { color: var(--ink); }
 html[data-pal="punk"] .who__p a { color: var(--ink); border-bottom-color: var(--red); }
 html[data-pal="punk"] .progress { background: color-mix(in srgb, var(--ink) 12%, transparent); }
 html[data-pal="punk"] .progress span { background: var(--red); }
-html[data-pal="punk"] .came__word { text-shadow: .04em .04em 0 var(--lime); }
+html[data-pal="punk"] .came__word { text-shadow: .045em .045em 0 var(--lime), .05em .05em 0 color-mix(in srgb, var(--ink) 25%, transparent); }
 html[data-pal="punk"] :is(.came__line--b mark, .end__big--b span) { background: var(--red); color: var(--ice); }
 html[data-pal="punk"] .say__text mark, html[data-pal="punk"] mark { background: var(--lime); color: var(--ink); }
 html[data-pal="punk"] .btn--lime, html[data-pal="punk"] .btn--ink { background: var(--red); color: var(--ice); }
@@ -257,3 +257,6 @@ html[data-pal="punk"] .chips input:checked + span { background: var(--lime); bor
 html[data-pal="punk"] .field input:focus, html[data-pal="punk"] .field textarea:focus { box-shadow: 0 2px 0 var(--red); }
 html[data-pal="punk"] .end__sig, html[data-pal="punk"] .end__q { color: var(--ink); }
 html[data-pal="punk"] .hero__foot .mono, html[data-pal="punk"] .label { color: var(--red); }
+html[data-pal="punk"] .dock .dock__go { box-shadow: inset 1.5px 0 0 var(--ink); }
+html[data-pal="punk"] .chips input:checked + span { box-shadow: 2px 2px 0 var(--ink); }
+html[data-pal="punk"] .step__t { text-shadow: .03em .03em 0 var(--lime); }

@@ -3,19 +3,20 @@
    Story: ~100 managers (dots) travel through six moves as you scroll. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var LIME = '#d7ff3c', INK = '#0b0d10', ICE = '#eef1f0', RED = '#ff4b2b', GREY = '#4a5058';
+  var LIME = '#d7ff3c', INK = '#0b0d10', ICE = '#eef1f0', RED = '#ff4b2b', GREY = '#4a5058', POP = '#d7ff3c', PUNK = false;
   function rgba(hex, a) { var n = parseInt(hex.slice(1), 16); return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')'; }
   /* ---------- palettes: accent / dark / light / signal ---------- */
   var PALETTES = {
     lime: { name: 'Lime (original)', lime: '#d7ff3c', ink: '#0b0d10', ice: '#eef1f0', red: '#ff4b2b' },
-    punk: { name: 'Snow · Red · Punk', lime: '#83fd80', ink: '#141414', ice: '#fdfffd', red: '#f42902',
+    punk: { name: 'Snow · Red · Punk', lime: '#f3fd80', ink: '#141414', ice: '#fdfffd', red: '#f42902',
             js: { INK: '#fdfffd', LIME: '#f42902', ICE: '#f42902', RED: '#141414' } }
   };
   function applyPalette(key) {
     var p = PALETTES[key] || PALETTES.lime, r = document.documentElement.style;
     LIME = p.lime; INK = p.ink; ICE = p.ice; RED = p.red;
+    PUNK = !!p.js; POP = p.lime;
     if (p.js) { INK = p.js.INK; LIME = p.js.LIME; ICE = p.js.ICE; RED = p.js.RED; }
-    GREY = rgba(ICE, p.js ? .4 : .28);
+    GREY = rgba(ICE, p.js ? .55 : .28);
     document.documentElement.dataset.pal = key; r.setProperty('--lime', p.lime); r.setProperty('--ink', p.ink); r.setProperty('--ice', p.ice); r.setProperty('--red', p.red);
     var m = document.querySelector('meta[name=theme-color]'); if (m) m.content = p.ink;
     try { localStorage.setItem('vcc-palette', key); } catch (e) {}
@@ -62,14 +63,15 @@
     function assign() { var pts = T[wi]; for (var i = 0; i < P.length; i++) { var p = pts[i % pts.length]; P[i].tx = p[0]; P[i].ty = p[1]; } }
     function build() {
       S = setup(cv); T = WORDS.map(shape);
-      var n = Math.min(2400, Math.max(800, Math.round(S.W * S.H / 700)));
+      var n = Math.min(PUNK ? 3400 : 2400, Math.max(800, Math.round(S.W * S.H / (PUNK ? 430 : 700))));
       while (P.length < n) P.push({ x: rnd(0, S.W), y: rnd(0, S.H), vx: 0, vy: 0, k: rnd(.035, .07) });
       P.length = n; assign();
     }
     function tick(t) {
       if (!locked && t - last > 2800) { last = t; wi = (wi + 1) % WORDS.length; P.forEach(function (p) { p.vx += rnd(-16, 16); p.vy += rnd(-16, 16); }); assign(); }
       var c = S.ctx; c.fillStyle = INK; c.fillRect(0, 0, S.W, S.H); c.fillStyle = LIME;
-      var s = S.W < 700 ? 2.2 : 3;
+      var s = PUNK ? (S.W < 700 ? 3.2 : 4.4) : (S.W < 700 ? 2.2 : 3);
+      if (PUNK) { c.fillStyle = POP; for (var q = 0; q < P.length; q++) c.fillRect(P[q].x + 1.6, P[q].y + 1.6, s, s); c.fillStyle = LIME; }
       for (var i = 0; i < P.length; i++) {
         var p = P[i];
         p.vx += (p.tx - p.x) * p.k; p.vy += (p.ty - p.y) * p.k;
@@ -144,7 +146,18 @@
       });
     }
 
-    function label(c, txt, x, y, color, a) { c.globalAlpha = a; c.fillStyle = color; c.font = '500 11px "IBM Plex Mono", monospace'; c.fillText(txt.toUpperCase(), x, y); c.globalAlpha = 1; }
+    function label(c, txt, x, y, color, a) {
+      txt = txt.toUpperCase();
+      if (PUNK) {
+        c.font = '500 12px "IBM Plex Mono", monospace';
+        var w = c.measureText(txt).width;
+        c.fillStyle = POP; c.fillRect(x - 7 + 3, y - 15 + 3, w + 14, 22);
+        c.fillStyle = color === RED ? RED : LIME; c.fillRect(x - 7, y - 15, w + 14, 22);
+        c.fillStyle = color === RED ? '#fdfffd' : '#fdfffd'; c.fillText(txt, x, y);
+        return;
+      }
+      c.globalAlpha = a; c.fillStyle = color; c.font = '500 11px "IBM Plex Mono", monospace'; c.fillText(txt, x, y); c.globalAlpha = 1;
+    }
 
     var shown = 0;
     function draw(now) {
@@ -157,21 +170,22 @@
 
       // lines
       c.lineWidth = .7;
-      if (step === 3) { c.strokeStyle = rgba(RED, .35); mentorLinks.forEach(function (l) { var a = R[l[0]], b = M[l[1]]; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); }); }
-      if (step === 5) { c.strokeStyle = rgba(LIME, .22); edges.forEach(function (l) { var a = M[l[0]], b = M[l[1]]; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); }); }
+      if (step === 3) { c.strokeStyle = rgba(RED, PUNK ? .45 : .35); mentorLinks.forEach(function (l) { var a = R[l[0]], b = M[l[1]]; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); }); }
+      if (step === 5) { c.strokeStyle = rgba(LIME, PUNK ? .38 : .22); edges.forEach(function (l) { var a = M[l[0]], b = M[l[1]]; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); }); }
 
       // managers
       var blocks = roomLayout(), g = blocks[0].g;
       M.forEach(function (d) {
-        var col = ICE, s = 5;
-        if (step === 0) { col = GREY; s = 4; }
-        if (step === 2 || step === 3) s = Math.max(4, g * .42);
-        if (step === 4) { col = d.launch ? LIME : GREY; s = d.launch ? Math.max(5, Math.min(A.w / 14, A.h / 10) * .5) : 4; }
-        if (step === 5) { col = LIME; s = 5 + Math.sin(t * 2 + d.rx * 6) * 1; }
+        var col = ICE, s = PUNK ? 9 : 5;
+        if (step === 0) { col = GREY; s = PUNK ? 7 : 4; }
+        if (step === 2 || step === 3) s = Math.max(4, g * (PUNK ? .58 : .42));
+        if (step === 4) { col = d.launch ? LIME : GREY; s = d.launch ? Math.max(5, Math.min(A.w / 14, A.h / 10) * (PUNK ? .62 : .5)) : (PUNK ? 6 : 4); }
+        if (step === 5) { col = LIME; s = (PUNK ? 8 : 5) + Math.sin(t * 2 + d.rx * 6) * 1; }
+        if (PUNK && step !== 0) { c.fillStyle = POP; c.fillRect(d.x - s / 2 + s * .28, d.y - s / 2 + s * .28, s, s); }
         c.fillStyle = col; c.fillRect(d.x - s / 2, d.y - s / 2, s, s);
       });
       // mentors
-      if (step === 3) R.forEach(function (d) { c.fillStyle = RED; c.beginPath(); c.arc(d.x, d.y, 4.5, 0, 6.283); c.fill(); });
+      if (step === 3) R.forEach(function (d) { c.fillStyle = RED; c.beginPath(); c.arc(d.x, d.y, PUNK ? 6.5 : 4.5, 0, 6.283); c.fill(); });
 
       // labels
       var mn = Math.min(A.w, A.h);
