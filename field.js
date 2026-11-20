@@ -64,7 +64,7 @@
     var id = 0;
     C.forEach(function (c, ci) {
       for (var i = 0; i < c.n; i++) {
-        var a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random()) * Math.min(W, H) * .085;
+        var a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random()) * Math.min(W, H) * .058;
         dots.push({
           ci: ci,
           x: Math.random() * W, y: Math.random() * H,
@@ -103,7 +103,7 @@
         var a = dots[i], b = dots[j];
         var dx = a.x - b.x, dy = a.y - b.y, dd = dx * dx + dy * dy;
         var same = a.ci === b.ci;
-        var lim = same ? 3600 : 0;
+        var lim = same ? 2200 : 0;
         if (dd < lim) {
           ctx.strokeStyle = 'rgba(13,16,20,' + (0.22 * gather * (1 - dd / lim)) + ')';
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
