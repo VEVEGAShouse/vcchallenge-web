@@ -44,13 +44,13 @@ a { color: inherit; }
 
 /* stack */
 .stack { position: relative; }
-.card { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 90px var(--pad) clamp(30px, 6vh, 70px); overflow: hidden; }
+.card { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; padding: 76px var(--pad) clamp(24px, 5vh, 60px); overflow: hidden; }
 .card--ice { background: var(--ice); color: var(--ink); border-top: 1px solid #d4d9d8; }
 .card--ink { background: var(--ink); color: var(--ice); }
 .card--lime { background: var(--lime); color: var(--ink); }
-.card__k { position: absolute; top: 76px; left: var(--pad); }
-.card__y { font-size: clamp(130px, 33vw, 560px); font-weight: 900; letter-spacing: -0.07em; line-height: .76; margin-left: -0.05em; }
-.card__t { margin-top: clamp(20px, 3vw, 40px); max-width: 30ch; font-size: clamp(20px, 2.2vw, 32px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
+.card__k { }
+.card__y { margin-top: auto; font-size: clamp(130px, min(33vw, 62svh), 560px); font-weight: 900; letter-spacing: -0.07em; line-height: .76; margin-left: -0.05em; }
+.card__t { margin-top: 18px; max-width: 26ch; font-size: clamp(20px, 2.2vw, 32px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
 .card--ink .card__y { color: var(--lime); }
 .card--end .card__y { -webkit-text-stroke: 3px var(--ink); color: transparent; }
 
