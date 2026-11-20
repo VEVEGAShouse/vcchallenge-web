@@ -215,3 +215,5 @@ button.btn { border: 0; cursor: pointer; font-family: var(--sans); }
 .rec__t { color: color-mix(in srgb, var(--ink) 60%, transparent); }
 #recPlay { width: 100%; }
 .hi__done { padding-top: 10px; }
+.hi__mail { margin-top: 18px; padding-top: 14px; border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent); }
+.hi__mail a { color: inherit; border-bottom: 1px solid currentColor; text-decoration: none; }

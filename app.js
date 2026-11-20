@@ -244,7 +244,7 @@
 
   /* ================= SAY HI ================= */
   (function () {
-    var CALENDLY = '';                                   // paste the 30-min Calendly link here
+    var CALENDLY = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dE6NxPJ1XK5tI87Nzt3u1fD1dJmy-BuM0MPCEQLm_36YZmyafm0wydS9pkPtjTYMTvCwM5lFx'; // Google Calendar booking page «30 min con VE»
     var INBOX = 'hello@vevegas.com';                     // where notes and voice notes arrive (via FormSubmit)
     var dlg = document.getElementById('hi'), done = document.getElementById('hiDone');
     if (CALENDLY) document.getElementById('callLink').href = CALENDLY;
