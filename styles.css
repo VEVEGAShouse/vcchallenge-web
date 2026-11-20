@@ -59,6 +59,7 @@ a { color: inherit; }
 .numbers .label { border-color: #262b31; }
 .nb { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(48px, 6vw, 80px) var(--pad); }
 .nb__fig { font-size: clamp(88px, 11vw, 168px); font-weight: 900; letter-spacing: -0.06em; line-height: .85; }
+.nb__fig sup.pre { margin: 0 4px 0 0; }
 .nb__fig sup { font-size: .32em; color: var(--red); letter-spacing: 0; margin-left: 4px; vertical-align: top; position: relative; top: .15em; }
 .nb__item dd { margin-top: 18px; color: #a9b0b8; max-width: 24ch; }
 
