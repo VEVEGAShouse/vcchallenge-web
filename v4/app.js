@@ -15,7 +15,7 @@
     var p = PALETTES[key] || PALETTES.lime, r = document.documentElement.style;
     LIME = p.lime; INK = p.ink; ICE = p.ice; RED = p.red;
     if (p.js) { INK = p.js.INK; LIME = p.js.LIME; ICE = p.js.ICE; RED = p.js.RED; }
-    GREY = rgba(ICE, p.js ? .22 : .28);
+    GREY = rgba(ICE, p.js ? .4 : .28);
     document.documentElement.dataset.pal = key; r.setProperty('--lime', p.lime); r.setProperty('--ink', p.ink); r.setProperty('--ice', p.ice); r.setProperty('--red', p.red);
     var m = document.querySelector('meta[name=theme-color]'); if (m) m.content = p.ink;
     try { localStorage.setItem('vcc-palette', key); } catch (e) {}
