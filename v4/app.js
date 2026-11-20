@@ -150,7 +150,8 @@
       txt = txt.toUpperCase();
       if (PUNK) {
         c.font = '500 12px "IBM Plex Mono", monospace';
-        var w = c.measureText(txt).width;
+        var w = c.measureText(txt).width, cw = c.canvas.clientWidth || 9999;
+        if (x + w + 10 > cw) x = cw - w - 10; if (x < 8) x = 8;
         c.fillStyle = POP; c.fillRect(x - 7 + 3, y - 15 + 3, w + 14, 22);
         c.fillStyle = color === RED ? RED : LIME; c.fillRect(x - 7, y - 15, w + 14, 22);
         c.fillStyle = color === RED ? '#fdfffd' : '#fdfffd'; c.fillText(txt, x, y);
@@ -177,11 +178,11 @@
       var blocks = roomLayout(), g = blocks[0].g;
       M.forEach(function (d) {
         var col = ICE, s = PUNK ? 9 : 5;
-        if (step === 0) { col = GREY; s = PUNK ? 7 : 4; }
+        if (step === 0) { col = PUNK ? rgba(LIME, .75) : GREY; s = PUNK ? 11 : 4; }
         if (step === 2 || step === 3) s = Math.max(4, g * (PUNK ? .58 : .42));
         if (step === 4) { col = d.launch ? LIME : GREY; s = d.launch ? Math.max(5, Math.min(A.w / 14, A.h / 10) * (PUNK ? .62 : .5)) : (PUNK ? 6 : 4); }
-        if (step === 5) { col = LIME; s = (PUNK ? 8 : 5) + Math.sin(t * 2 + d.rx * 6) * 1; }
-        if (PUNK && step !== 0) { c.fillStyle = POP; c.fillRect(d.x - s / 2 + s * .28, d.y - s / 2 + s * .28, s, s); }
+        if (step === 5) { col = LIME; s = (PUNK ? 11 : 5) + Math.sin(t * 2 + d.rx * 6) * 1; }
+        if (PUNK) { c.fillStyle = POP; c.fillRect(d.x - s / 2 + s * .28, d.y - s / 2 + s * .28, s, s); }
         c.fillStyle = col; c.fillRect(d.x - s / 2, d.y - s / 2, s, s);
       });
       // mentors
