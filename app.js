@@ -279,7 +279,8 @@
       var body = { email: em, intent: intent, message: note.message.value.trim(), _subject: 'VC Challenge site · ' + intent, _template: 'table', _captcha: 'false' };
       var btn = note.querySelector('.hi__send'); btn.disabled = true;
       fetch('https://formsubmit.co/ajax/' + INBOX, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
-        .then(function (r) { if (!r.ok) throw 0; thanks(); note.reset(); })
+        .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function (j) { if (!j || String(j.success) !== 'true') throw 0; thanks(); note.reset(); })
         .catch(function () { location.href = 'mailto:' + INBOX + '?subject=' + encodeURIComponent(body._subject) + '&body=' + encodeURIComponent(body.message); })
         .then(function () { btn.disabled = false; });
     });
