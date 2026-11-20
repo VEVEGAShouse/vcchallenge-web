@@ -1,41 +1,10 @@
-/* VC Challenge — v3
+/* VC Challenge
    Hero: a swarm that writes the name.
    Story: ~100 managers (dots) travel through six moves as you scroll. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var LIME = '#d7ff3c', INK = '#0b0d10', ICE = '#eef1f0', RED = '#ff4b2b', GREY = '#4a5058', POP = '#d7ff3c', PUNK = false;
   function rgba(hex, a) { var n = parseInt(hex.slice(1), 16); return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')'; }
-  /* ---------- palettes: accent / dark / light / signal ---------- */
-  var PALETTES = {
-    lime: { name: 'Lime (original)', lime: '#d7ff3c', ink: '#0b0d10', ice: '#eef1f0', red: '#ff4b2b' },
-    punk: { name: 'Snow · Red · Punk', lime: '#f3fd80', ink: '#141414', ice: '#fdfffd', red: '#f42902',
-            js: { INK: '#fdfffd', LIME: '#f42902', ICE: '#f42902', RED: '#141414' } }
-  };
-  function applyPalette(key) {
-    var p = PALETTES[key] || PALETTES.lime, r = document.documentElement.style;
-    LIME = p.lime; INK = p.ink; ICE = p.ice; RED = p.red;
-    PUNK = !!p.js; POP = p.lime;
-    if (p.js) { INK = p.js.INK; LIME = p.js.LIME; ICE = p.js.ICE; RED = p.js.RED; }
-    GREY = rgba(ICE, p.js ? .55 : .28);
-    document.documentElement.dataset.pal = key; r.setProperty('--lime', p.lime); r.setProperty('--ink', p.ink); r.setProperty('--ice', p.ice); r.setProperty('--red', p.red);
-    var m = document.querySelector('meta[name=theme-color]'); if (m) m.content = p.ink;
-    try { localStorage.setItem('vcc-palette', key); } catch (e) {}
-    document.querySelectorAll('.pal button').forEach(function (b) { b.classList.toggle('on', b.dataset.k === key); });
-  }
-  (function () {
-    var bar = document.createElement('div'); bar.className = 'pal'; bar.innerHTML = '<span>Palette</span>';
-    Object.keys(PALETTES).forEach(function (k) {
-      var p = PALETTES[k], b = document.createElement('button');
-      b.type = 'button'; b.dataset.k = k; b.title = p.name; b.setAttribute('aria-label', 'Palette ' + p.name);
-      b.innerHTML = '<i style="background:' + p.ink + '"></i><i style="background:' + p.lime + '"></i>';
-      b.addEventListener('click', function () { applyPalette(k); });
-      bar.appendChild(b);
-    });
-    document.body.appendChild(bar);
-    var q = (location.search.match(/[?&]p=(\w+)/) || [])[1], saved = null;
-    try { saved = localStorage.getItem('vcc-palette'); } catch (e) {}
-    applyPalette(q || saved || 'lime');
-  })();
   function rnd(a, b) { return a + Math.random() * (b - a); }
   function setup(cv) {
     var ctx = cv.getContext('2d'), DPR = Math.min(2, window.devicePixelRatio || 1);
@@ -246,7 +215,7 @@
       foot.style.opacity = Math.max(0, 1 - p * 4);
       var e = Math.min(1, Math.max(0, (p - 0.5) / 0.25));
       enter.style.opacity = e;
-      enter.style.background = rgba(document.documentElement.dataset.pal === 'punk' ? INK : LIME, e);
+      enter.style.background = rgba(LIME, e);
       enter.style.transform = 'scale(' + (1.15 - e * .15) + ')';
       document.body.dataset.heroLime = e > .5 ? '1' : '';
     }

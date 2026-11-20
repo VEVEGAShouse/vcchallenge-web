@@ -3,147 +3,211 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VC Challenge — The training ground of Nordic venture, 2020–2024</title>
-  <meta name="description" content="VC Challenge trained the emerging fund managers of the Nordics, from the first Oslo cohort to its last in 2024. An archive.">
-  <link rel="canonical" href="https://vcchallenge.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vcchallenge.com/">
-  <meta property="og:title" content="VC Challenge, 2020–2024">
-  <meta property="og:description" content="The training ground of Nordic venture. An archive.">
-  <meta name="theme-color" content="#f3f4f2">
+  <title>VC Challenge — by Virginia E. Vegas · The accelerator for fund managers, 2020–2024</title>
+  <meta name="description" content="VC Challenge trained around 100 emerging fund managers across the Nordics, from first idea to Fund I. 2020–2024.">
+  <meta name="theme-color" content="#0b0d10">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-  <header class="bar">
-    <span class="mono">VC Challenge</span>
-    <span class="mono bar__status"><i class="dot"></i> Archive · Closed 2024</span>
+  <header class="bar mono">
+    <span>VC Challenge</span>
+    <span class="bar__mid" id="barStep">Nordic · 2020 — 2024</span>
+    <span>Archive</span>
   </header>
 
-  <!-- HERO ─────────────────────────────────────────── -->
-  <section class="hero" aria-labelledby="t">
-    <canvas id="field" class="hero__field" aria-hidden="true"></canvas>
-    <div class="hero__inner">
-      <p class="mono hero__kicker">Nordic venture · 2020 — 2024</p>
-      <h1 id="t" class="hero__title">VC<br>Challenge</h1>
-      <p class="hero__lead">The training ground for the first funds of the Nordics.</p>
+  <!-- HERO -->
+  <div class="hero-wrap" id="heroWrap" data-dock="ink">
+  <section class="hero" aria-label="VC Challenge">
+    <canvas id="swarm" aria-hidden="true"></canvas>
+    <p class="hero__enter" id="heroEnter">Welcome to the room<br><span>where ~100 fund managers were made.</span></p>
+    <h1 class="sr">VC Challenge</h1>
+    <div class="hero__foot">
+      <p class="hero__lead">The accelerator for fund managers.<br><span>Nordic. 2020 — 2024.</span></p>
+      <p class="mono hero__down">Scroll to enter ↓</p>
     </div>
-    <p class="hero__caption mono" aria-hidden="true">~100 emerging managers. Four programmes. One ecosystem.</p>
+  </section>
+  </div>
+
+  <!-- STORY: ~100 managers, six moves -->
+  <section class="story" id="story" aria-label="What VC Challenge did" data-dock="ink">
+    <div class="story__stage">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <div class="story__text">
+        <ol class="steps" id="steps">
+          <li class="step is-on">
+            <p class="mono step__k">00 · The gap</p>
+            <p class="step__t">Half of the Nordic fund managers were on their first fund.</p>
+            <p class="step__b">And there was no school for it. <b>Virginia E. Vegas</b> decided to build one.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">01 · The door</p>
+            <p class="step__t">We opened it, across five countries.</p>
+            <p class="step__b">Founders, business angels, corporates, family offices, public investors. Anyone with a thesis and the nerve to raise.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">02 · The room</p>
+            <p class="step__t">Three Nordic cohorts. Around 100 managers.</p>
+            <p class="step__b">Expert-led sessions on sourcing and dealflow, portfolio construction, fundraising strategy and fund operations.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">03 · The circle</p>
+            <p class="step__t">The people who run the industry, in the room.</p>
+            <p class="step__b">VCs, lawyers, family offices, fund administrators, and the state LPs who decide where the capital goes.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">04 · The leap</p>
+            <p class="step__t">70% decided to launch.</p>
+            <p class="step__b">In 2023 alone: 18 funds in the making, over €200m in target capital, more than 350 companies to back.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">05 · The network</p>
+            <p class="step__t">One Nordic network. Still investing.</p>
+            <p class="step__b">The challenge ended in 2024. The funds it started did not.</p>
+          </li>
+        </ol>
+        <div class="progress mono" aria-hidden="true"><span id="prog"></span></div>
+      </div>
+    </div>
   </section>
 
-  <!-- STATEMENT ────────────────────────────────────── -->
-  <section class="statement wrap reveal">
-    <p class="statement__text">Almost half of the Nordic fund managers were investing <em>their first fund</em>. Nobody was teaching them how. So we built the place where the region’s next generation of VCs learned to raise, build and run a fund.</p>
+  <!-- THEY CAME AS -->
+  <section class="came" aria-label="Who joined" data-dock="lime">
+    <p class="came__line">They came as</p>
+    <p class="came__word" id="cameWord">founders.</p>
+    <p class="came__line came__line--b">They left as <mark>fund managers.</mark></p>
   </section>
 
-  <!-- TIMELINE ─────────────────────────────────────── -->
-  <section class="timeline" aria-labelledby="tl">
+  <!-- THE VISIONARY -->
+  <section class="who" aria-labelledby="who" data-dock="ink">
+    <div class="wrap who__in">
+      <p class="mono who__k reveal">The visionary behind it</p>
+      <h2 id="who" class="who__name reveal"><span>Virginia</span><span>E. Vegas</span></h2>
+      <div class="who__grid">
+        <p class="who__p reveal">Conceived VC Challenge in 2020 and took it from a prototype in Oslo to three Nordic cohorts and two European programmes.</p>
+        <p class="who__p reveal">Today she builds new ideas at <a href="https://fronttier.io" target="_blank" rel="noopener">FRONTTIER</a> and thinks out loud at <a href="https://vevegas.com" target="_blank" rel="noopener">House of Thought</a>.</p>
+      </div>
+      <div class="who__cta reveal">
+        <button type="button" class="btn btn--lime" data-hi>Come say hi →</button>
+        <a class="btn btn--ghost" href="https://vevegas.com" target="_blank" rel="noopener">vevegas.com ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMMES -->
+  <section class="prog wrap" aria-labelledby="pg" data-dock="ice">
+    <h2 id="pg" class="mono label reveal">The programmes</h2>
+    <div class="rows">
+      <div class="row reveal"><span class="row__y">2020</span><span class="row__n">Prototype</span><span class="row__d">Norwegian startups meet venture capital.</span></div>
+      <div class="row reveal"><span class="row__y">2021</span><span class="row__n">Norway</span><span class="row__d">The first VC Challenge. Demo day for LPs in Helsinki.</span></div>
+      <div class="row reveal"><span class="row__y">2022</span><span class="row__n">Nordic I</span><span class="row__d">19 funds · 25 managers · 5 countries. 14 set out to raise.</span></div>
+      <div class="row reveal"><span class="row__y">2023</span><span class="row__n">Nordic II</span><span class="row__d">26 teams · 44 managers. 18 building a fund, 4 already investing.</span></div>
+      <div class="row reveal"><span class="row__y">23/24</span><span class="row__n">Nordic III</span><span class="row__d">15 teams · 30 managers · plus the Baltics, Germany and Belgium.</span></div>
+      <div class="row row--end reveal"><span class="row__y">2024</span><span class="row__n">Closed</span><span class="row__d">The last cohort graduates.</span></div>
+    </div>
+  </section>
+
+  <!-- PLATE -->
+  <section class="plate wrap" aria-labelledby="pl" data-dock="ice">
+    <p id="pl" class="mono label reveal">Every fund starts with a name</p>
+    <div class="plate__card reveal">
+      <p class="mono plate__row"><span>Fund I</span><span>Nordic · Early stage</span></p>
+      <p class="plate__name"><span id="plateName">Your name</span><br>Ventures</p>
+      <p class="mono plate__row"><span>Status</span><span class="blink">● First close</span></p>
+    </div>
+    <label class="plate__input mono reveal">
+      <span>Type a name</span>
+      <input id="nameInput" maxlength="22" autocomplete="off" spellcheck="false" placeholder="Your name">
+    </label>
+  </section>
+
+  <!-- ALSO -->
+  <section class="also wrap" data-dock="ice">
+    <p class="mono label reveal">Also</p>
+    <p class="also__text reveal">Two programmes for women investors across Europe, 2023 and 2024. <span>Some 300 women, more than 30 countries.</span></p>
+  </section>
+
+  <!-- END -->
+  <section class="end" data-dock="lime">
     <div class="wrap">
-      <h2 id="tl" class="label mono reveal">01 — The arc</h2>
-    </div>
-    <ol class="tl">
-      <li class="tl__item reveal">
-        <span class="tl__year">2020</span>
-        <span class="tl__place mono">Oslo · Prototype</span>
-        <p>It starts as a bridge between Norwegian startups and venture capital.</p>
-      </li>
-      <li class="tl__item reveal">
-        <span class="tl__year">2021</span>
-        <span class="tl__place mono">Norway</span>
-        <p>The first VC Challenge: Norway’s aspiring fund managers learn to build a fund, and pitch to LPs in Helsinki.</p>
-      </li>
-      <li class="tl__item reveal">
-        <span class="tl__year">2022</span>
-        <span class="tl__place mono">Nordic I</span>
-        <p>The first Nordic edition: 19 emerging funds from all five countries.</p>
-      </li>
-      <li class="tl__item reveal">
-        <span class="tl__year">2023</span>
-        <span class="tl__place mono">Nordic II · Copenhagen</span>
-        <p>26 venture teams, 44 managers. 18 of the teams go on to build a fund.</p>
-      </li>
-      <li class="tl__item reveal">
-        <span class="tl__year">23/24</span>
-        <span class="tl__place mono">Nordic III</span>
-        <p>15 teams, 30 managers, from the founders of Iceland’s first unicorn to Germany’s deep-tech investors.</p>
-      </li>
-      <li class="tl__item reveal">
-        <span class="tl__year">2024</span>
-        <span class="tl__place mono">Closed</span>
-        <p>The last cohort graduates. The challenge ends. The funds keep investing.</p>
-      </li>
-    </ol>
-  </section>
-
-  <!-- NUMBERS ──────────────────────────────────────── -->
-  <section class="numbers" aria-labelledby="nb">
-    <div class="wrap">
-      <h2 id="nb" class="label mono reveal">02 — In numbers</h2>
-      <dl class="nb">
-        <div class="nb__item reveal"><dt class="nb__fig"><sup class="pre">~</sup><span data-count="100">100</span></dt><dd>emerging fund managers trained</dd></div>
-        <div class="nb__item reveal"><dt class="nb__fig"><span data-count="4">4</span></dt><dd>fund manager programmes: one Norwegian, three Nordic</dd></div>
-        <div class="nb__item reveal"><dt class="nb__fig"><span data-count="60">60</span></dt><dd>venture teams in the Nordic editions</dd></div>
-        <div class="nb__item reveal"><dt class="nb__fig"><span data-count="5">5</span></dt><dd>Nordic countries, plus the Baltics, Germany and Belgium</dd></div>
-        <div class="nb__item reveal"><dt class="nb__fig"><span data-count="70">70</span><sup>%</sup></dt><dd>of the 2023 teams decided to launch their fund</dd></div>
-        <div class="nb__item reveal"><dt class="nb__fig"><sup class="pre">€</sup><span data-count="200">200</span><sup>m+</sup></dt><dd>combined target capital of the funds born in 2023</dd></div>
-      </dl>
-    </div>
-  </section>
-
-  <!-- CURRICULUM ───────────────────────────────────── -->
-  <section class="curriculum wrap" aria-labelledby="cu">
-    <h2 id="cu" class="label mono reveal">03 — What they learned</h2>
-    <ul class="cu">
-      <li class="cu__row reveal"><span class="mono">A</span><span class="cu__t">Sourcing &amp; dealflow</span></li>
-      <li class="cu__row reveal"><span class="mono">B</span><span class="cu__t">Portfolio construction</span></li>
-      <li class="cu__row reveal"><span class="mono">C</span><span class="cu__t">Fundraising strategy</span></li>
-      <li class="cu__row reveal"><span class="mono">D</span><span class="cu__t">Fund operations</span></li>
-    </ul>
-    <p class="cu__note reveal">Taught by investors from the Nordic venture ecosystem, for private individuals building a first fund, small VCs going bigger, and corporates opening a venture arm.</p>
-  </section>
-
-  <!-- RESEARCH ─────────────────────────────────────── -->
-  <section class="research wrap" aria-labelledby="rs">
-    <h2 id="rs" class="label mono reveal">04 — We mapped the frontier</h2>
-    <p class="research__lead reveal">Every year we counted every first-time venture fund born in the Nordics, because you cannot build an ecosystem you cannot see.</p>
-    <div class="research__links">
-      <a class="rlink reveal" href="https://medium.com/@virginia.vegas/all-the-first-time-vc-funds-launched-in-the-nordics-in-2022-4d67b2f1eace" target="_blank" rel="noopener">
-        <span class="mono">Report · 2022</span>
-        <span class="rlink__t">All the first-time VC funds launched in the Nordics in 2022</span>
-        <span class="rlink__a" aria-hidden="true">↗</span>
-      </a>
-      <a class="rlink reveal" href="https://medium.com/@virginia.vegas/all-the-first-time-venture-funds-established-in-the-nordics-in-2023-171e8b66aa8f" target="_blank" rel="noopener">
-        <span class="mono">Report · 2023</span>
-        <span class="rlink__t">19 new funds, ~€600m in target capital</span>
-        <span class="rlink__a" aria-hidden="true">↗</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ALSO ───────────────────────────────────────── -->
-  <section class="also wrap" aria-labelledby="al">
-    <h2 id="al" class="label mono reveal">05 — Also</h2>
-    <p class="also__text reveal">Beyond the Nordics, two programmes for women investors across Europe, in 2023 and 2024. <span>Some 300 women, more than 30 countries.</span></p>
-  </section>
-
-  <!-- CLOSING ──────────────────────────────────────── -->
-  <section class="closing">
-    <div class="wrap">
-      <p class="closing__big reveal">The challenge is over.<br><span>The funds are investing.</span></p>
-      <p class="closing__sig reveal mono">Led by <a href="https://vevegas.com" target="_blank" rel="noopener">Virginia E. Vegas</a> · Managing Director, VC Challenge</p>
+      <p class="end__big reveal">The challenge<br>is over.</p>
+      <p class="end__big end__big--b reveal"><span>The funds<br>are investing.</span></p>
+      <div class="end__call reveal">
+        <p class="end__q">Curious mind? Let’s start a conversation.</p>
+        <button type="button" class="btn btn--ink" data-hi>Come say hi →</button>
+      </div>
     </div>
   </section>
 
   <footer class="foot wrap mono">
     <span>vcchallenge.com</span>
-    <span>An archive · 2020—2024</span>
+    <span>2020 — 2024</span>
   </footer>
 
-  <script src="field.js?v=2" defer></script>
+  <button class="dock" id="dock" data-theme="ink" type="button" data-hi aria-haspopup="dialog">
+    <span class="dock__by"><i></i>By <b>Virginia E. Vegas</b></span>
+    <span class="dock__go">Don’t be shy, come say hi →</span>
+  </button>
+
+  <dialog class="hi" id="hi" aria-labelledby="hiT">
+    <div class="hi__top">
+      <p class="mono hi__k"><i class="live"></i>Virginia · <span id="hiClock">--:--</span> in Spain</p>
+      <form method="dialog"><button class="hi__x" aria-label="Close">✕</button></form>
+    </div>
+    <h3 class="hi__t" id="hiT">Don’t be shy,<br>come say hi.</h3>
+    <p class="hi__lead">For curious minds. No pitch, no project needed. Every message is read and answered.</p>
+
+    <div class="hi__tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-tab="note">Leave a note</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="call">Book 30 min</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="voice">Voice note</button>
+    </div>
+
+    <form class="hi__pane is-on" data-pane="note" id="noteForm" novalidate>
+      <fieldset class="chips">
+        <legend class="mono">What brings you here?</legend>
+        <label><input type="radio" name="intent" value="Just curious" checked><span>Just curious</span></label>
+        <label><input type="radio" name="intent" value="I want something like this"><span>I want something like this</span></label>
+        <label><input type="radio" name="intent" value="Let’s collaborate"><span>Let’s collaborate</span></label>
+        <label><input type="radio" name="intent" value="Networking"><span>Networking</span></label>
+      </fieldset>
+      <label class="field"><span class="mono">Your email</span><input type="email" name="email" required autocomplete="email" placeholder="you@domain.com"></label>
+      <label class="field"><span class="mono">Message · optional</span><textarea name="message" rows="2" placeholder="One line is plenty."></textarea></label>
+      <button class="hi__send" type="submit">Send <span>→</span></button>
+      <p class="hi__fine mono">Reply within 48h · No newsletters, ever</p>
+    </form>
+
+    <div class="hi__pane" data-pane="call">
+      <p class="hi__big">30 minutes. Video or phone.</p>
+      <ul class="hi__list"><li>No agenda required</li><li>Ideas, programmes, or anything in between</li><li>Pick a time that suits you</li></ul>
+      <a class="hi__send" id="callLink" href="mailto:hello@vevegas.com?subject=30%20minutes%3F" target="_blank" rel="noopener">See available times <span>→</span></a>
+    </div>
+
+    <form class="hi__pane" data-pane="voice" id="voiceForm" novalidate>
+      <p class="hi__big">Talk, don’t type.</p>
+      <div class="rec">
+        <button type="button" class="rec__btn" id="recBtn"><i></i><span>Record</span></button>
+        <span class="mono rec__t" id="recTime">0:00 / 2:00</span>
+      </div>
+      <audio id="recPlay" controls hidden></audio>
+      <label class="field"><span class="mono">Your email</span><input type="email" name="email" required autocomplete="email" placeholder="you@domain.com"></label>
+      <button class="hi__send" type="submit" id="voiceSend" disabled>Send voice note <span>→</span></button>
+      <p class="hi__fine mono">Up to 2 minutes · Recorded in your browser</p>
+    </form>
+
+    <div class="hi__done" id="hiDone" hidden>
+      <p class="hi__t">Thank you.</p>
+      <p class="hi__lead">Your message is on its way. Talk soon. — Virginia</p>
+    </div>
+  </dialog>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <script src="app.js?v=20" defer></script>
 </body>
 </html>
