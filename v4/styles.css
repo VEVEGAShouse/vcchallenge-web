@@ -190,9 +190,9 @@ button.btn { border: 0; cursor: pointer; font-family: var(--sans); }
 .hi__sig { font-family: var(--hand); font-size: 34px; font-weight: 700; text-align: right; margin-top: 10px; transform: rotate(-4deg); }
 
 /* palette switcher (to choose; remove when decided) */
-.pal { position: fixed; z-index: 45; left: var(--pad); bottom: clamp(16px, 3vh, 28px); display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: rgba(20,20,24,.85); backdrop-filter: blur(6px); border-radius: 999px; color: #fff; font: 500 11px/1 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.pal { position: fixed; z-index: 45; right: var(--pad); top: 52px; display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: rgba(20,20,24,.85); backdrop-filter: blur(6px); border-radius: 999px; color: #fff; font: 500 11px/1 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
 .pal button { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
 .pal button i { display: block; }
 .pal button.on { border-color: #fff; transform: scale(1.12); }
 .pal span { padding: 0 4px; }
-@media (max-width: 640px) { .pal span { display: none; } .pal { bottom: 76px; } }
+@media (max-width: 640px) { .pal span { display: none; } }
