@@ -87,6 +87,11 @@ a { color: inherit; }
 .pt { display: flex; flex-wrap: wrap; gap: 10px; }
 .pt li { border: 1px solid var(--ink); border-radius: 999px; padding: 10px 18px; font-weight: 500; }
 
+/* also */
+.also { padding-block: clamp(100px, 14vw, 190px) 0; }
+.also__text { font-size: clamp(20px, 2vw, 28px); line-height: 1.25; letter-spacing: -0.015em; max-width: 38ch; color: var(--muted); }
+.also__text span { color: var(--ink); }
+
 /* closing */
 .closing { padding-block: clamp(130px, 18vw, 260px) clamp(80px, 10vw, 140px); }
 .closing__big { font-size: clamp(44px, 8.4vw, 136px); font-weight: 900; letter-spacing: -0.055em; line-height: .9; }
