@@ -17,29 +17,32 @@
   (function () {
     var cv = document.getElementById('swarm'), S, P = [], T = [], wi = 0, last = 0, m = { x: -9e3, y: -9e3 }, locked = false;
     window.__lockSwarm = function (on) { if (on === locked) return; locked = on; if (on && S) { wi = 0; assign(); } };
-    var WORDS = ['VC', 'CHALLENGE', '100', 'GPs', '2020—24'];
+    var WORDS = ['VC', 'CHALLENGE', '100', 'GPs', '2020—24'], NP = 1200;
     function shape(word) {
       var o = document.createElement('canvas'); o.width = S.W; o.height = S.H;
       var c = o.getContext('2d'), fs = Math.min(S.H * .6, S.W * 1.5 / Math.max(2, word.length * .62));
       c.font = '900 ' + fs + 'px "Schibsted Grotesk", sans-serif';
       var w = c.measureText(word).width; if (w > S.W * .92) { fs *= S.W * .92 / w; c.font = '900 ' + fs + 'px "Schibsted Grotesk", sans-serif'; }
       c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(word, S.W / 2, S.H * .42);
-      var d = c.getImageData(0, 0, S.W, S.H).data, pts = [], st = Math.max(4, Math.round(Math.sqrt(S.W * S.H / 24000)));
-      for (var y = 0; y < S.H; y += st) for (var x = 0; x < S.W; x += st) if (d[(y * S.W + x) * 4 + 3] > 128) pts.push([x, y]);
+      var d = c.getImageData(0, 0, S.W, S.H).data, pts = [], st = 2;
+      // pick the finest grid that every particle can fill, so letters read as solid dot-type, not noise
+      do { st++; pts = []; for (var y = 0; y < S.H; y += st) for (var x = 0; x < S.W; x += st) if (d[(y * S.W + x) * 4 + 3] > 128) pts.push([x, y]); } while (pts.length > NP && st < 14);
       for (var i = pts.length - 1; i > 0; i--) { var j = (Math.random() * (i + 1)) | 0, t = pts[i]; pts[i] = pts[j]; pts[j] = t; }
       return pts;
     }
     function assign() { var pts = T[wi]; for (var i = 0; i < P.length; i++) { var p = pts[i % pts.length]; P[i].tx = p[0]; P[i].ty = p[1]; } }
     function build() {
-      S = setup(cv); T = WORDS.map(shape);
-      var n = Math.min(PUNK ? 3400 : 2400, Math.max(800, Math.round(S.W * S.H / (PUNK ? 430 : 700))));
+      S = setup(cv);
+      if (S.W < 640) WORDS = ['VC', '100', 'GPs', 'FUND I', '20—24'];
+      var n = Math.min(PUNK ? 3400 : 2400, Math.max(S.W < 640 ? 1300 : 800, Math.round(S.W * S.H / (PUNK ? 430 : 700))));
+      NP = n; T = WORDS.map(shape);
       while (P.length < n) P.push({ x: rnd(0, S.W), y: rnd(0, S.H), vx: 0, vy: 0, k: rnd(.035, .07) });
       P.length = n; assign();
     }
     function tick(t) {
       if (!locked && t - last > 2800) { last = t; wi = (wi + 1) % WORDS.length; P.forEach(function (p) { p.vx += rnd(-16, 16); p.vy += rnd(-16, 16); }); assign(); }
       var c = S.ctx; c.fillStyle = INK; c.fillRect(0, 0, S.W, S.H); c.fillStyle = LIME;
-      var s = PUNK ? (S.W < 700 ? 3.2 : 4.4) : (S.W < 700 ? 2.2 : 3);
+      var s = PUNK ? (S.W < 700 ? 3.2 : 4.4) : (S.W < 700 ? 2.6 : 3);
       if (PUNK) { c.fillStyle = POP; for (var q = 0; q < P.length; q++) c.fillRect(P[q].x + 1.6, P[q].y + 1.6, s, s); c.fillStyle = LIME; }
       for (var i = 0; i < P.length; i++) {
         var p = P[i];
