@@ -22,7 +22,7 @@
       c.font = '900 ' + fs + 'px "Schibsted Grotesk", sans-serif';
       var w = c.measureText(word).width; if (w > S.W * .92) { fs *= S.W * .92 / w; c.font = '900 ' + fs + 'px "Schibsted Grotesk", sans-serif'; }
       c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(word, S.W / 2, S.H * .42);
-      var d = c.getImageData(0, 0, S.W, S.H).data, pts = [], st = Math.max(3, Math.round(Math.sqrt(S.W * S.H / 40000)));
+      var d = c.getImageData(0, 0, S.W, S.H).data, pts = [], st = Math.max(4, Math.round(Math.sqrt(S.W * S.H / 24000)));
       for (var y = 0; y < S.H; y += st) for (var x = 0; x < S.W; x += st) if (d[(y * S.W + x) * 4 + 3] > 128) pts.push([x, y]);
       for (var i = pts.length - 1; i > 0; i--) { var j = (Math.random() * (i + 1)) | 0, t = pts[i]; pts[i] = pts[j]; pts[j] = t; }
       return pts;
@@ -30,20 +30,20 @@
     function assign() { var pts = T[wi]; for (var i = 0; i < P.length; i++) { var p = pts[i % pts.length]; P[i].tx = p[0]; P[i].ty = p[1]; } }
     function build() {
       S = setup(cv); T = WORDS.map(shape);
-      var n = Math.min(3200, Math.max(900, Math.round(S.W * S.H / 600)));
-      while (P.length < n) P.push({ x: rnd(0, S.W), y: rnd(0, S.H), vx: 0, vy: 0, k: rnd(.015, .035) });
+      var n = Math.min(2400, Math.max(800, Math.round(S.W * S.H / 700)));
+      while (P.length < n) P.push({ x: rnd(0, S.W), y: rnd(0, S.H), vx: 0, vy: 0, k: rnd(.035, .07) });
       P.length = n; assign();
     }
     function tick(t) {
-      if (t - last > 2400) { last = t; wi = (wi + 1) % WORDS.length; P.forEach(function (p) { p.vx += rnd(-16, 16); p.vy += rnd(-16, 16); }); assign(); }
+      if (t - last > 2800) { last = t; wi = (wi + 1) % WORDS.length; P.forEach(function (p) { p.vx += rnd(-16, 16); p.vy += rnd(-16, 16); }); assign(); }
       var c = S.ctx; c.fillStyle = INK; c.fillRect(0, 0, S.W, S.H); c.fillStyle = LIME;
-      var s = S.W < 700 ? 1.8 : 2.3;
+      var s = S.W < 700 ? 2.2 : 3;
       for (var i = 0; i < P.length; i++) {
         var p = P[i];
         p.vx += (p.tx - p.x) * p.k; p.vy += (p.ty - p.y) * p.k;
         var dx = p.x - m.x, dy = p.y - m.y, dd = dx * dx + dy * dy;
         if (dd < 20000) { var f = (20000 - dd) / 20000 * 7 / Math.sqrt(dd + 1); p.vx += dx * f; p.vy += dy * f; }
-        p.vx *= .84; p.vy *= .84; p.x += p.vx; p.y += p.vy;
+        p.vx *= .78; p.vy *= .78; p.x += p.vx; p.y += p.vy;
         c.fillRect(p.x, p.y, s, s);
       }
       requestAnimationFrame(tick);
@@ -101,7 +101,7 @@
         else { // leap: launched rise into a big block, the rest stay small below
           var L = M.filter(function (q) { return q.launch; }), N = M.filter(function (q) { return !q.launch; });
           var g = Math.min(A.w / 14, A.h / 10);
-          if (d.launch) { var i = L.indexOf(d); t = [A.x + (i % 12) * g, A.y + Math.floor(i / 12) * g]; }
+          if (d.launch) { var i = L.indexOf(d); t = [A.x + g / 2 + (i % 12) * g, A.y + g + Math.floor(i / 12) * g]; }
           else { var j = N.indexOf(d); t = [A.x + (j % 12) * g * .6, A.y + A.h * .78 + Math.floor(j / 12) * g * .6]; }
         }
         d.tx = t[0]; d.ty = t[1];
@@ -126,7 +126,7 @@
       // lines
       c.lineWidth = .7;
       if (step === 3) { c.strokeStyle = 'rgba(255,75,43,.35)'; mentorLinks.forEach(function (l) { var a = R[l[0]], b = M[l[1]]; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); }); }
-      if (step === 5) { c.strokeStyle = 'rgba(215,255,60,.28)'; edges.forEach(function (l) { var a = M[l[0]], b = M[l[1]]; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); }); }
+      if (step === 5) { c.strokeStyle = 'rgba(215,255,60,.2)'; edges.forEach(function (l) { var a = M[l[0]], b = M[l[1]]; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); }); }
 
       // managers
       var blocks = roomLayout(), g = blocks[0].g;
@@ -139,14 +139,14 @@
         c.fillStyle = col; c.fillRect(d.x - s / 2, d.y - s / 2, s, s);
       });
       // mentors
-      R.forEach(function (d) { c.fillStyle = RED; c.beginPath(); c.arc(d.x, d.y, step === 3 ? 4.5 : 3, 0, 6.283); c.fill(); });
+      if (step === 3) R.forEach(function (d) { c.fillStyle = RED; c.beginPath(); c.arc(d.x, d.y, 4.5, 0, 6.283); c.fill(); });
 
       // labels
       var mn = Math.min(A.w, A.h);
       if (step === 1 || step === 5) COUNTRIES.forEach(function (C) { label(c, C.k, A.x + C.x * A.w - 10, A.y + C.y * A.h - mn * .12, step === 5 ? LIME : '#9aa1a8', .9); });
       if (step === 2 || step === 3) blocks.forEach(function (b) { label(c, b.c.label + ' · ' + b.c.n, b.x, b.y + b.rows * b.g + 22, '#9aa1a8', .95); });
       if (step === 3) label(c, 'VCs · lawyers · family offices · fund administrators · LPs', A.x, A.y - 4, RED, .95);
-      if (step === 4) { var gg = Math.min(A.w / 14, A.h / 10); label(c, '70% · building Fund I', A.x, A.y - 14, LIME, 1); label(c, 'not yet', A.x, A.y + A.h * .78 - 12, '#7d848b', 1); }
+      if (step === 4) { var gg = Math.min(A.w / 14, A.h / 10); label(c, '70% · building Fund I', A.x, A.y, LIME, 1); label(c, 'not yet', A.x, A.y + A.h * .78 - 12, '#7d848b', 1); }
 
       if (!reduce) requestAnimationFrame(draw);
     }
