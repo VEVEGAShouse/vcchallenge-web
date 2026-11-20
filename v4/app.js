@@ -8,12 +8,14 @@
   /* ---------- palettes: accent / dark / light / signal ---------- */
   var PALETTES = {
     lime: { name: 'Lime (original)', lime: '#d7ff3c', ink: '#0b0d10', ice: '#eef1f0', red: '#ff4b2b' },
-    punk: { name: 'Red · Snow · Punk yellow', lime: '#ffe14d', ink: '#ff3b1f', ice: '#fbfaf6', red: '#111111' }
+    punk: { name: 'Snow · Red · Punk', lime: '#83fd80', ink: '#141414', ice: '#fdfffd', red: '#f42902',
+            js: { INK: '#fdfffd', LIME: '#f42902', ICE: '#f42902', RED: '#141414' } }
   };
   function applyPalette(key) {
     var p = PALETTES[key] || PALETTES.lime, r = document.documentElement.style;
     LIME = p.lime; INK = p.ink; ICE = p.ice; RED = p.red;
-    GREY = rgba(p.ice, .28);
+    if (p.js) { INK = p.js.INK; LIME = p.js.LIME; ICE = p.js.ICE; RED = p.js.RED; }
+    GREY = rgba(ICE, p.js ? .22 : .28);
     document.documentElement.dataset.pal = key; r.setProperty('--lime', p.lime); r.setProperty('--ink', p.ink); r.setProperty('--ice', p.ice); r.setProperty('--red', p.red);
     var m = document.querySelector('meta[name=theme-color]'); if (m) m.content = p.ink;
     try { localStorage.setItem('vcc-palette', key); } catch (e) {}
@@ -229,7 +231,7 @@
       foot.style.opacity = Math.max(0, 1 - p * 4);
       var e = Math.min(1, Math.max(0, (p - 0.5) / 0.25));
       enter.style.opacity = e;
-      enter.style.background = rgba(document.documentElement.dataset.pal === 'punk' ? ICE : LIME, e);
+      enter.style.background = rgba(document.documentElement.dataset.pal === 'punk' ? INK : LIME, e);
       enter.style.transform = 'scale(' + (1.15 - e * .15) + ')';
       document.body.dataset.heroLime = e > .5 ? '1' : '';
     }

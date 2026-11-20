@@ -224,12 +224,36 @@ button.btn { border: 0; cursor: pointer; font-family: var(--sans); }
 .pal span { padding: 0 4px; }
 @media (max-width: 640px) { .pal span { display: none; } }
 
-/* red · snow · punk yellow: red leads, white breathes, yellow only as pop details */
-html[data-pal="punk"] .came, html[data-pal="punk"] .end { background: var(--ice); }
-html[data-pal="punk"] .came__line--b mark, html[data-pal="punk"] .end__big--b span { background: var(--ink); color: var(--lime); }
-html[data-pal="punk"] .came__word { color: var(--ink); text-shadow: .045em .045em 0 var(--lime); }
-html[data-pal="punk"] .who__name span:last-child { color: var(--lime); }
-html[data-pal="punk"] .plate__card { box-shadow: 18px 18px 0 var(--lime); }
-html[data-pal="punk"] .hi__send:hover { background: var(--lime); color: var(--ink); }
-html[data-pal="punk"] .chips input:checked + span { background: var(--lime); }
-html[data-pal="punk"] .hero__enter { color: var(--ink); }
+/* snow · red · punk: snowy white ground, red for what matters, punk green-yellow only as touches */
+html[data-pal="punk"] body { background: var(--ice); color: var(--ink); }
+html[data-pal="punk"] :is(.hero-wrap, .hero, .story, .who, .came, .end) { background: var(--ice); color: var(--ink); }
+html[data-pal="punk"] :is(.step__t, .came__word, .end__big, .hi__t, .row__y, .who__name span:first-child, .hero__enter, .hero__lead) { color: var(--red); }
+html[data-pal="punk"] .hero__lead span { color: color-mix(in srgb, var(--ink) 70%, transparent); }
+html[data-pal="punk"] :is(.step__k, .who__k, .hero__down, .step__b b) { color: var(--red); }
+html[data-pal="punk"] :is(.step__b, .who__p) { color: color-mix(in srgb, var(--ink) 80%, transparent); }
+html[data-pal="punk"] .who__name span:last-child { color: var(--ink); }
+html[data-pal="punk"] .who__p a { color: var(--ink); border-bottom-color: var(--red); }
+html[data-pal="punk"] .progress { background: color-mix(in srgb, var(--ink) 12%, transparent); }
+html[data-pal="punk"] .progress span { background: var(--red); }
+html[data-pal="punk"] .came__word { text-shadow: .04em .04em 0 var(--lime); }
+html[data-pal="punk"] :is(.came__line--b mark, .end__big--b span) { background: var(--red); color: var(--ice); }
+html[data-pal="punk"] .say__text mark, html[data-pal="punk"] mark { background: var(--lime); color: var(--ink); }
+html[data-pal="punk"] .btn--lime, html[data-pal="punk"] .btn--ink { background: var(--red); color: var(--ice); }
+html[data-pal="punk"] .btn--ghost { color: var(--ink); }
+html[data-pal="punk"] .plate__card { background: var(--red); color: var(--ice); box-shadow: 18px 18px 0 var(--lime); }
+html[data-pal="punk"] .plate__row { color: color-mix(in srgb, var(--ice) 80%, transparent); }
+html[data-pal="punk"] .plate__name span, html[data-pal="punk"] .blink { color: var(--lime); }
+html[data-pal="punk"] .row:hover { background: var(--red); color: var(--ice); }
+html[data-pal="punk"] .row:hover .row__y { color: var(--ice); }
+html[data-pal="punk"] .rows { border-top-color: var(--red); }
+html[data-pal="punk"] .dock { background: var(--red) !important; color: var(--ice) !important; }
+html[data-pal="punk"] .dock .dock__go { background: var(--lime) !important; color: var(--ink) !important; }
+html[data-pal="punk"] .hi__send { background: var(--red); color: var(--ice); }
+html[data-pal="punk"] .hi__send:hover { background: var(--ink); color: var(--ice); }
+html[data-pal="punk"] .hi__tabs { border-color: var(--red); }
+html[data-pal="punk"] .hi__tabs button + button { border-left-color: var(--red); }
+html[data-pal="punk"] .hi__tabs button[aria-selected="true"] { background: var(--red); color: var(--ice); }
+html[data-pal="punk"] .chips input:checked + span { background: var(--lime); border-color: var(--ink); }
+html[data-pal="punk"] .field input:focus, html[data-pal="punk"] .field textarea:focus { box-shadow: 0 2px 0 var(--red); }
+html[data-pal="punk"] .end__sig, html[data-pal="punk"] .end__q { color: var(--ink); }
+html[data-pal="punk"] .hero__foot .mono, html[data-pal="punk"] .label { color: var(--red); }
