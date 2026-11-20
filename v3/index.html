@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VC Challenge — The accelerator for fund managers, 2020–2024</title>
+  <meta name="description" content="VC Challenge trained around 100 emerging fund managers across the Nordics, from first idea to Fund I. 2020–2024.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0b0d10">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=1">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+  <header class="bar mono">
+    <span>VC Challenge</span>
+    <span class="bar__mid" id="barStep">Nordic · 2020 — 2024</span>
+    <span>Archive</span>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="VC Challenge">
+    <canvas id="swarm" aria-hidden="true"></canvas>
+    <h1 class="sr">VC Challenge</h1>
+    <div class="hero__foot">
+      <p class="hero__lead">The accelerator for fund managers.<br><span>Nordic. 2020 — 2024.</span></p>
+      <p class="mono hero__down">Scroll to see what happened ↓</p>
+    </div>
+  </section>
+
+  <!-- STORY: ~100 managers, six moves -->
+  <section class="story" id="story" aria-label="What VC Challenge did">
+    <div class="story__stage">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <div class="story__text">
+        <ol class="steps" id="steps">
+          <li class="step is-on">
+            <p class="mono step__k">00 · The gap</p>
+            <p class="step__t">Half of the Nordic fund managers were on their first fund.</p>
+            <p class="step__b">And there was no school for it.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">01 · The door</p>
+            <p class="step__t">We opened it, across five countries.</p>
+            <p class="step__b">Founders, business angels, corporates, family offices, public investors. Anyone with a thesis and the nerve to raise.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">02 · The room</p>
+            <p class="step__t">Three Nordic cohorts. Around 100 managers.</p>
+            <p class="step__b">Expert-led sessions on sourcing and dealflow, portfolio construction, fundraising strategy and fund operations.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">03 · The circle</p>
+            <p class="step__t">The people who run the industry, in the room.</p>
+            <p class="step__b">VCs, lawyers, family offices, fund administrators, and the state LPs who decide where the capital goes.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">04 · The leap</p>
+            <p class="step__t">70% decided to launch.</p>
+            <p class="step__b">In 2023 alone: 18 funds in the making, over €200m in target capital, more than 350 companies to back.</p>
+          </li>
+          <li class="step">
+            <p class="mono step__k">05 · The network</p>
+            <p class="step__t">One Nordic network. Still investing.</p>
+            <p class="step__b">The challenge ended in 2024. The funds it started did not.</p>
+          </li>
+        </ol>
+        <div class="progress mono" aria-hidden="true"><span id="prog"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THEY CAME AS -->
+  <section class="came" aria-label="Who joined">
+    <p class="came__line">They came as</p>
+    <p class="came__word" id="cameWord">founders.</p>
+    <p class="came__line came__line--b">They left as <mark>fund managers.</mark></p>
+  </section>
+
+  <!-- PROGRAMMES -->
+  <section class="prog wrap" aria-labelledby="pg">
+    <h2 id="pg" class="mono label reveal">The programmes</h2>
+    <div class="rows">
+      <div class="row reveal"><span class="row__y">2020</span><span class="row__n">Prototype</span><span class="row__d">Norwegian startups meet venture capital.</span></div>
+      <div class="row reveal"><span class="row__y">2021</span><span class="row__n">Norway</span><span class="row__d">The first VC Challenge. Demo day for LPs in Helsinki.</span></div>
+      <div class="row reveal"><span class="row__y">2022</span><span class="row__n">Nordic I</span><span class="row__d">19 funds · 25 managers · 5 countries. 14 set out to raise.</span></div>
+      <div class="row reveal"><span class="row__y">2023</span><span class="row__n">Nordic II</span><span class="row__d">26 teams · 44 managers. 18 building a fund, 4 already investing.</span></div>
+      <div class="row reveal"><span class="row__y">23/24</span><span class="row__n">Nordic III</span><span class="row__d">15 teams · 30 managers · plus the Baltics, Germany and Belgium.</span></div>
+      <div class="row row--end reveal"><span class="row__y">2024</span><span class="row__n">Closed</span><span class="row__d">The last cohort graduates.</span></div>
+    </div>
+  </section>
+
+  <!-- PLATE -->
+  <section class="plate wrap" aria-labelledby="pl">
+    <p id="pl" class="mono label reveal">Every fund starts with a name</p>
+    <div class="plate__card reveal">
+      <p class="mono plate__row"><span>Fund I</span><span>Nordic · Early stage</span></p>
+      <p class="plate__name"><span id="plateName">Your name</span><br>Ventures</p>
+      <p class="mono plate__row"><span>Status</span><span class="blink">● First close</span></p>
+    </div>
+    <label class="plate__input mono reveal">
+      <span>Type a name</span>
+      <input id="nameInput" maxlength="22" autocomplete="off" spellcheck="false" placeholder="Your name">
+    </label>
+  </section>
+
+  <!-- ALSO -->
+  <section class="also wrap">
+    <p class="mono label reveal">Also</p>
+    <p class="also__text reveal">Two programmes for women investors across Europe, 2023 and 2024. <span>Some 300 women, more than 30 countries.</span></p>
+  </section>
+
+  <!-- END -->
+  <section class="end">
+    <div class="wrap">
+      <p class="end__big reveal">The challenge<br>is over.</p>
+      <p class="end__big end__big--b reveal"><span>The funds<br>are investing.</span></p>
+      <p class="mono end__sig reveal">Led by <a href="https://vevegas.com" target="_blank" rel="noopener">Virginia E. Vegas</a> · Managing Director</p>
+    </div>
+  </section>
+
+  <footer class="foot wrap mono">
+    <span>vcchallenge.com</span>
+    <span>2020 — 2024</span>
+  </footer>
+
+  <script src="app.js?v=1" defer></script>
+</body>
+</html>
