@@ -163,31 +163,58 @@ mark { background: var(--lime); color: var(--ink); padding: 0 .1em; box-decorati
 .cursor.big { width: 64px; height: 64px; margin: -32px 0 0 -32px; }
 @media (hover: none) { .cursor { display: none; } }
 
-/* ===== the human layer ===== */
-:root { --hand: "Caveat", "Segoe Print", cursive; --paper: #f7f4ec; }
-.hand { font-family: var(--hand); font-weight: 700; font-size: 1.25em; letter-spacing: 0; }
+/* ===== say hi ===== */
 button.btn { border: 0; cursor: pointer; font-family: var(--sans); }
 .dock { border: 0; cursor: pointer; font-family: var(--sans); padding: 0; }
-.dock__note { display: block; padding: 8px 16px 9px 18px; font-family: var(--hand); font-weight: 700; font-size: 21px; line-height: .95; text-align: left; }
-.dock__note span { font-weight: 500; font-size: 17px; opacity: .8; }
-.dock__go { align-self: stretch; display: flex; align-items: center; font-family: var(--hand); font-size: 23px; font-weight: 700; padding: 4px 20px 6px; }
+.dock__go { align-self: stretch; display: flex; align-items: center; font-weight: 700; font-size: 15px; padding: 12px 18px; }
 .dock__by b { margin-left: 4px; }
 
-.hi { width: min(560px, calc(100vw - 32px)); border: 0; padding: clamp(26px, 4vw, 40px); background: var(--paper); color: var(--ink); box-shadow: 14px 14px 0 var(--lime), 0 40px 80px -30px rgba(0,0,0,.6); transform: rotate(-.8deg);
-  background-image: repeating-linear-gradient(transparent 0 31px, rgba(11,13,16,.07) 31px 32px); }
-.hi::backdrop { background: rgba(11,13,16,.55); backdrop-filter: blur(3px); }
-.hi[open] { animation: hiIn .45s var(--ease); }
-@keyframes hiIn { from { opacity: 0; transform: rotate(-4deg) translateY(30px) scale(.96); } }
-.hi__x { position: absolute; top: 10px; right: 14px; border: 0; background: none; font: 400 30px/1 var(--hand); cursor: pointer; color: var(--ink); }
-.hi__hand { font-family: var(--hand); font-weight: 700; font-size: clamp(40px, 6vw, 56px); line-height: .95; margin-bottom: 14px; }
-.hi__lead { font-size: 16px; line-height: 1.45; color: #3a4046; margin-bottom: 18px; }
-.hi__opts { display: grid; gap: 8px; }
-.hi__opts a { display: flex; gap: 14px; align-items: center; padding: 12px 14px; text-decoration: none; border: 1.5px solid var(--ink); background: #fff; transition: background .25s, transform .3s var(--ease); }
-.hi__opts a:hover { background: var(--lime); transform: translateX(6px) rotate(-.5deg); }
-.hi__opts b { display: block; font-size: 17px; letter-spacing: -0.01em; }
-.hi__opts small { display: block; font-size: 14px; color: #555c63; }
-.hi__n { font-family: var(--hand); font-size: 30px; font-weight: 700; width: 22px; text-align: center; }
-.hi__sig { font-family: var(--hand); font-size: 34px; font-weight: 700; text-align: right; margin-top: 10px; transform: rotate(-4deg); }
+.hi { width: min(540px, calc(100vw - 24px)); max-height: calc(100svh - 24px); overflow: auto; border: 0; padding: clamp(24px, 3.4vw, 38px); background: var(--ice); color: var(--ink); box-shadow: 0 50px 120px -40px rgba(0,0,0,.65); }
+.hi::backdrop { background: color-mix(in srgb, var(--ink) 70%, transparent); backdrop-filter: blur(6px); }
+.hi[open] { animation: hiIn .5s var(--ease); }
+@keyframes hiIn { from { opacity: 0; transform: translateY(24px); } }
+.hi__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
+.hi__k { display: flex; align-items: center; gap: 8px; color: color-mix(in srgb, var(--ink) 60%, transparent); }
+.live { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34,197,94,.6); animation: live 2s infinite; }
+@keyframes live { 70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+.hi__x { border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--ink); padding: 4px; }
+.hi__t { font-size: clamp(36px, 5vw, 52px); line-height: .95; letter-spacing: -0.045em; font-weight: 900; }
+.hi__lead { margin-top: 14px; font-size: 16px; line-height: 1.45; color: color-mix(in srgb, var(--ink) 70%, transparent); }
+.hi__tabs { display: grid; grid-template-columns: repeat(3, 1fr); margin: 26px 0 22px; border: 1px solid var(--ink); }
+.hi__tabs button { border: 0; background: transparent; padding: 11px 6px; font: 500 14px var(--sans); color: var(--ink); cursor: pointer; transition: background .25s, color .25s; }
+.hi__tabs button + button { border-left: 1px solid var(--ink); }
+.hi__tabs button[aria-selected="true"] { background: var(--ink); color: var(--ice); }
+.hi__pane { display: none; }
+.hi__pane.is-on { display: grid; gap: 16px; animation: hiIn .35s var(--ease); }
+.chips { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chips legend { margin-bottom: 10px; color: color-mix(in srgb, var(--ink) 60%, transparent); }
+.chips input { position: absolute; opacity: 0; }
+.chips span { display: inline-block; padding: 8px 13px; border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); border-radius: 999px; font-size: 14px; cursor: pointer; transition: all .2s; }
+.chips input:checked + span { background: var(--lime); border-color: var(--ink); color: var(--ink); }
+.chips input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 2px; }
+.field { display: grid; gap: 6px; }
+.field span { color: color-mix(in srgb, var(--ink) 60%, transparent); }
+.field input, .field textarea { border: 0; border-bottom: 1.5px solid var(--ink); background: transparent; padding: 8px 0; font: 500 18px/1.35 var(--sans); color: var(--ink); outline: none; resize: none; border-radius: 0; }
+.field input:focus, .field textarea:focus { border-bottom-color: var(--ink); box-shadow: 0 2px 0 var(--lime); }
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--ink) 35%, transparent); }
+.hi__send { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px 20px; background: var(--ink); color: var(--ice); border: 0; font: 700 17px var(--sans); text-decoration: none; cursor: pointer; transition: background .25s, color .25s; }
+.hi__send span { transition: transform .3s var(--ease); }
+.hi__send:hover { background: var(--lime); color: var(--ink); }
+.hi__send:hover span { transform: translateX(6px); }
+.hi__send:disabled { opacity: .35; cursor: not-allowed; }
+.hi__fine { color: color-mix(in srgb, var(--ink) 50%, transparent); font-size: 11px; }
+.hi__big { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+.hi__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.hi__list li { padding-left: 22px; position: relative; color: color-mix(in srgb, var(--ink) 75%, transparent); }
+.hi__list li::before { content: ""; position: absolute; left: 0; top: .55em; width: 10px; height: 2px; background: var(--ink); }
+.rec { display: flex; align-items: center; gap: 16px; }
+.rec__btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border: 1.5px solid var(--ink); background: transparent; border-radius: 999px; font: 600 15px var(--sans); color: var(--ink); cursor: pointer; }
+.rec__btn i { width: 12px; height: 12px; border-radius: 50%; background: #e5322d; }
+.rec__btn.on { background: var(--ink); color: var(--ice); }
+.rec__btn.on i { animation: blink 1s steps(1) infinite; }
+.rec__t { color: color-mix(in srgb, var(--ink) 60%, transparent); }
+#recPlay { width: 100%; }
+.hi__done { padding-top: 10px; }
 
 /* palette switcher (to choose; remove when decided) */
 .pal { position: fixed; z-index: 45; right: var(--pad); top: 52px; display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: rgba(20,20,24,.85); backdrop-filter: blur(6px); border-radius: 999px; color: #fff; font: 500 11px/1 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
@@ -196,3 +223,13 @@ button.btn { border: 0; cursor: pointer; font-family: var(--sans); }
 .pal button.on { border-color: #fff; transform: scale(1.12); }
 .pal span { padding: 0 4px; }
 @media (max-width: 640px) { .pal span { display: none; } }
+
+/* red · snow · punk yellow: red leads, white breathes, yellow only as pop details */
+html[data-pal="punk"] .came, html[data-pal="punk"] .end { background: var(--ice); }
+html[data-pal="punk"] .came__line--b mark, html[data-pal="punk"] .end__big--b span { background: var(--ink); color: var(--lime); }
+html[data-pal="punk"] .came__word { color: var(--ink); text-shadow: .045em .045em 0 var(--lime); }
+html[data-pal="punk"] .who__name span:last-child { color: var(--lime); }
+html[data-pal="punk"] .plate__card { box-shadow: 18px 18px 0 var(--lime); }
+html[data-pal="punk"] .hi__send:hover { background: var(--lime); color: var(--ink); }
+html[data-pal="punk"] .chips input:checked + span { background: var(--lime); }
+html[data-pal="punk"] .hero__enter { color: var(--ink); }

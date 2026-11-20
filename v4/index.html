@@ -10,8 +10,8 @@
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=7">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=9">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -139,7 +139,7 @@
       <p class="end__big reveal">The challenge<br>is over.</p>
       <p class="end__big end__big--b reveal"><span>The funds<br>are investing.</span></p>
       <div class="end__call reveal">
-        <p class="end__q"><span class="hand">Curious mind?</span> Let’s start a conversation.</p>
+        <p class="end__q">Curious mind? Let’s start a conversation.</p>
         <button type="button" class="btn btn--ink" data-hi>Come say hi →</button>
       </div>
     </div>
@@ -152,24 +152,63 @@
 
   <button class="dock" id="dock" data-theme="ink" type="button" data-hi aria-haspopup="dialog">
     <span class="dock__by"><i></i>By <b>Virginia E. Vegas</b></span>
-    <span class="dock__go">Curious? Come say hi →</span>
+    <span class="dock__go">Don’t be shy, come say hi →</span>
   </button>
 
   <dialog class="hi" id="hi" aria-labelledby="hiT">
-    <form method="dialog"><button class="hi__x" aria-label="Close">×</button></form>
-    <p class="hi__hand" id="hiT">Curious? Come say hi.</p>
-    <p class="hi__lead">For curious minds. No pitch, no project needed. If something here sparked an idea, let’s start a conversation, any way you like:</p>
-    <ol class="hi__opts">
-      <li><a id="optChat" href="mailto:hello@vevegas.com?subject=Coffee%20chat%3F" target="_blank" rel="noopener"><span class="hi__n">1</span><span><b>A 30-minute chat</b><small>Pick a slot in my calendar. Coffee optional.</small></span></a></li>
-      <li><a href="mailto:hello@vevegas.com?subject=A%20voice%20note%20for%20Virginia&body=Record%20a%20voice%20memo%20on%20your%20phone%20and%20attach%20it%20here.%20As%20long%20or%20short%20as%20you%20like." target="_blank" rel="noopener"><span class="hi__n">2</span><span><b>A voice note</b><small>Talk, don’t type. Send it whenever.</small></span></a></li>
-      <li><a href="mailto:hello@vevegas.com?subject=Hi%20Virginia" target="_blank" rel="noopener"><span class="hi__n">3</span><span><b>A few lines</b><small>As much or as little as you like.</small></span></a></li>
-      <li><a href="mailto:hello@vevegas.com?subject=Something%20I%20made&body=Attach%20it%20here%3A%20a%20file%2C%20a%20deck%2C%20a%20link%2C%20a%20doodle." target="_blank" rel="noopener"><span class="hi__n">4</span><span><b>Something you made</b><small>A file, a link, a sketch, a crazy idea.</small></span></a></li>
-    </ol>
-    <p class="hi__sig">— V.</p>
+    <div class="hi__top">
+      <p class="mono hi__k"><i class="live"></i>Virginia · <span id="hiClock">--:--</span> in Spain</p>
+      <form method="dialog"><button class="hi__x" aria-label="Close">✕</button></form>
+    </div>
+    <h3 class="hi__t" id="hiT">Don’t be shy,<br>come say hi.</h3>
+    <p class="hi__lead">For curious minds. No pitch, no project needed. Every message is read and answered.</p>
+
+    <div class="hi__tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-tab="note">Leave a note</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="call">Book 30 min</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="voice">Voice note</button>
+    </div>
+
+    <form class="hi__pane is-on" data-pane="note" id="noteForm" novalidate>
+      <fieldset class="chips">
+        <legend class="mono">What brings you here?</legend>
+        <label><input type="radio" name="intent" value="Just curious" checked><span>Just curious</span></label>
+        <label><input type="radio" name="intent" value="I want something like this"><span>I want something like this</span></label>
+        <label><input type="radio" name="intent" value="Let’s collaborate"><span>Let’s collaborate</span></label>
+        <label><input type="radio" name="intent" value="Networking"><span>Networking</span></label>
+      </fieldset>
+      <label class="field"><span class="mono">Your email</span><input type="email" name="email" required autocomplete="email" placeholder="you@domain.com"></label>
+      <label class="field"><span class="mono">Message · optional</span><textarea name="message" rows="2" placeholder="One line is plenty."></textarea></label>
+      <button class="hi__send" type="submit">Send <span>→</span></button>
+      <p class="hi__fine mono">Reply within 48h · No newsletters, ever</p>
+    </form>
+
+    <div class="hi__pane" data-pane="call">
+      <p class="hi__big">30 minutes. Video or phone.</p>
+      <ul class="hi__list"><li>No agenda required</li><li>Ideas, programmes, or anything in between</li><li>Pick a time that suits you</li></ul>
+      <a class="hi__send" id="callLink" href="mailto:hello@vevegas.com?subject=30%20minutes%3F" target="_blank" rel="noopener">See available times <span>→</span></a>
+    </div>
+
+    <form class="hi__pane" data-pane="voice" id="voiceForm" novalidate>
+      <p class="hi__big">Talk, don’t type.</p>
+      <div class="rec">
+        <button type="button" class="rec__btn" id="recBtn"><i></i><span>Record</span></button>
+        <span class="mono rec__t" id="recTime">0:00 / 2:00</span>
+      </div>
+      <audio id="recPlay" controls hidden></audio>
+      <label class="field"><span class="mono">Your email</span><input type="email" name="email" required autocomplete="email" placeholder="you@domain.com"></label>
+      <button class="hi__send" type="submit" id="voiceSend" disabled>Send voice note <span>→</span></button>
+      <p class="hi__fine mono">Up to 2 minutes · Recorded in your browser</p>
+    </form>
+
+    <div class="hi__done" id="hiDone" hidden>
+      <p class="hi__t">Thank you.</p>
+      <p class="hi__lead">Your message is on its way. Talk soon. — Virginia</p>
+    </div>
   </dialog>
 
   <div class="cursor" id="cursor" aria-hidden="true"></div>
 
-  <script src="app.js?v=6" defer></script>
+  <script src="app.js?v=9" defer></script>
 </body>
 </html>

@@ -7,17 +7,14 @@
   function rgba(hex, a) { var n = parseInt(hex.slice(1), 16); return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')'; }
   /* ---------- palettes: accent / dark / light / signal ---------- */
   var PALETTES = {
-    lime:     { name: 'Lime',     lime: '#d7ff3c', ink: '#0b0d10', ice: '#eef1f0', red: '#ff4b2b' },
-    electric: { name: 'Electric', lime: '#ff3df2', ink: '#1218ff', ice: '#f3f1ff', red: '#ffe600' },
-    aurora:   { name: 'Aurora',   lime: '#00ffb2', ink: '#24004d', ice: '#f1ecff', red: '#ff5ec4' },
-    signal:   { name: 'Signal',   lime: '#ff5b14', ink: '#001a2c', ice: '#e7f3f4', red: '#2de2ff' },
-    acid:     { name: 'Acid',     lime: '#fff200', ink: '#5b00e6', ice: '#fffbe0', red: '#00ff85' }
+    lime: { name: 'Lime (original)', lime: '#d7ff3c', ink: '#0b0d10', ice: '#eef1f0', red: '#ff4b2b' },
+    punk: { name: 'Red · Snow · Punk yellow', lime: '#ffe14d', ink: '#ff3b1f', ice: '#fbfaf6', red: '#111111' }
   };
   function applyPalette(key) {
     var p = PALETTES[key] || PALETTES.lime, r = document.documentElement.style;
     LIME = p.lime; INK = p.ink; ICE = p.ice; RED = p.red;
     GREY = rgba(p.ice, .28);
-    r.setProperty('--lime', p.lime); r.setProperty('--ink', p.ink); r.setProperty('--ice', p.ice); r.setProperty('--red', p.red);
+    document.documentElement.dataset.pal = key; r.setProperty('--lime', p.lime); r.setProperty('--ink', p.ink); r.setProperty('--ice', p.ice); r.setProperty('--red', p.red);
     var m = document.querySelector('meta[name=theme-color]'); if (m) m.content = p.ink;
     try { localStorage.setItem('vcc-palette', key); } catch (e) {}
     document.querySelectorAll('.pal button').forEach(function (b) { b.classList.toggle('on', b.dataset.k === key); });
@@ -232,7 +229,7 @@
       foot.style.opacity = Math.max(0, 1 - p * 4);
       var e = Math.min(1, Math.max(0, (p - 0.5) / 0.25));
       enter.style.opacity = e;
-      enter.style.background = rgba(LIME, e);
+      enter.style.background = rgba(document.documentElement.dataset.pal === 'punk' ? ICE : LIME, e);
       enter.style.transform = 'scale(' + (1.15 - e * .15) + ')';
       document.body.dataset.heroLime = e > .5 ? '1' : '';
     }
@@ -261,13 +258,76 @@
 
   /* ================= SAY HI ================= */
   (function () {
-    var CALENDLY = ''; // paste the 30-min Calendly link here
-    var dlg = document.getElementById('hi');
-    if (CALENDLY) { var o = document.getElementById('optChat'); o.href = CALENDLY; }
-    document.querySelectorAll('[data-hi]').forEach(function (b) {
-      b.addEventListener('click', function () { if (dlg.showModal) dlg.showModal(); else window.location.href = 'mailto:hello@vevegas.com'; });
-    });
+    var CALENDLY = '';                                   // paste the 30-min Calendly link here
+    var INBOX = 'hello@vevegas.com';                     // where notes and voice notes arrive (via FormSubmit)
+    var dlg = document.getElementById('hi'), done = document.getElementById('hiDone');
+    if (CALENDLY) document.getElementById('callLink').href = CALENDLY;
+
+    // live clock in Spain: a real person, a real time zone
+    var clock = document.getElementById('hiClock');
+    function tick() { try { clock.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }); } catch (e) {} }
+    tick(); setInterval(tick, 30000);
+
+    function open() { reset(); if (dlg.showModal) dlg.showModal(); else location.href = 'mailto:' + INBOX; }
+    document.querySelectorAll('[data-hi]').forEach(function (b) { b.addEventListener('click', open); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+
+    // tabs
+    var tabs = dlg.querySelectorAll('[data-tab]'), panes = dlg.querySelectorAll('[data-pane]');
+    function show(name) {
+      tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.tab === name ? 'true' : 'false'); });
+      panes.forEach(function (p) { p.classList.toggle('is-on', p.dataset.pane === name); });
+    }
+    tabs.forEach(function (t) { t.addEventListener('click', function () { show(t.dataset.tab); }); });
+    function reset() { done.hidden = true; dlg.querySelector('.hi__tabs').hidden = false; show('note'); }
+    function thanks() { panes.forEach(function (p) { p.classList.remove('is-on'); }); dlg.querySelector('.hi__tabs').hidden = true; done.hidden = false; }
+    function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+    // a note: one email field, sent without leaving the page
+    var note = document.getElementById('noteForm');
+    note.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var em = note.email.value.trim();
+      if (!validEmail(em)) { note.email.focus(); note.email.setCustomValidity('Please add an email so I can reply'); note.email.reportValidity(); note.email.setCustomValidity(''); return; }
+      var intent = (note.querySelector('input[name=intent]:checked') || {}).value || '';
+      var body = { email: em, intent: intent, message: note.message.value.trim(), _subject: 'VC Challenge site · ' + intent, _template: 'table', _captcha: 'false' };
+      var btn = note.querySelector('.hi__send'); btn.disabled = true;
+      fetch('https://formsubmit.co/ajax/' + INBOX, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) })
+        .then(function (r) { if (!r.ok) throw 0; thanks(); note.reset(); })
+        .catch(function () { location.href = 'mailto:' + INBOX + '?subject=' + encodeURIComponent(body._subject) + '&body=' + encodeURIComponent(body.message); })
+        .then(function () { btn.disabled = false; });
+    });
+
+    // a voice note, recorded right here
+    var recBtn = document.getElementById('recBtn'), recTime = document.getElementById('recTime'), play = document.getElementById('recPlay');
+    var voice = document.getElementById('voiceForm'), send = document.getElementById('voiceSend');
+    var rec = null, chunks = [], blob = null, t0 = 0, timer = null, MAX = 120;
+    function fmt(s) { return Math.floor(s / 60) + ':' + ('0' + Math.floor(s % 60)).slice(-2); }
+    function stop() { if (rec && rec.state === 'recording') rec.stop(); clearInterval(timer); recBtn.classList.remove('on'); recBtn.querySelector('span').textContent = 'Record again'; }
+    recBtn.addEventListener('click', function () {
+      if (rec && rec.state === 'recording') return stop();
+      if (!navigator.mediaDevices || !window.MediaRecorder) { location.href = 'mailto:' + INBOX + '?subject=A%20voice%20note'; return; }
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+        chunks = []; rec = new MediaRecorder(stream);
+        rec.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
+        rec.onstop = function () { stream.getTracks().forEach(function (tr) { tr.stop(); }); blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' }); play.src = URL.createObjectURL(blob); play.hidden = false; send.disabled = false; };
+        rec.start(); t0 = Date.now(); recBtn.classList.add('on'); recBtn.querySelector('span').textContent = 'Stop';
+        timer = setInterval(function () { var s = (Date.now() - t0) / 1000; recTime.textContent = fmt(s) + ' / 2:00'; if (s >= MAX) stop(); }, 250);
+      }).catch(function () { recTime.textContent = 'Microphone blocked'; });
+    });
+    voice.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var em = voice.email.value.trim();
+      if (!validEmail(em) || !blob) { voice.email.focus(); return; }
+      // FormSubmit takes attachments through a normal multipart post: send it through a hidden frame
+      var frame = document.createElement('iframe'); frame.name = 'hiFrame'; frame.hidden = true; document.body.appendChild(frame);
+      var f = document.createElement('form'); f.action = 'https://formsubmit.co/' + INBOX; f.method = 'POST'; f.enctype = 'multipart/form-data'; f.target = 'hiFrame'; f.hidden = true;
+      [['email', em], ['_subject', 'VC Challenge site · voice note'], ['_captcha', 'false'], ['_template', 'table']].forEach(function (kv) { var i = document.createElement('input'); i.name = kv[0]; i.value = kv[1]; f.appendChild(i); });
+      var fi = document.createElement('input'); fi.type = 'file'; fi.name = 'attachment';
+      var ext = (blob.type.indexOf('mp4') > -1) ? 'm4a' : 'webm';
+      var dt = new DataTransfer(); dt.items.add(new File([blob], 'voice-note.' + ext, { type: blob.type })); fi.files = dt.files; f.appendChild(fi);
+      document.body.appendChild(f); f.submit(); send.disabled = true; setTimeout(thanks, 900);
+    });
   })();
 
   /* ================= REVEAL + PLATE ================= */
