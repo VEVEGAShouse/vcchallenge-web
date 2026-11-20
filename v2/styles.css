@@ -88,7 +88,7 @@ a { color: inherit; }
 /* end */
 .end { margin-top: clamp(120px, 16vw, 220px); background: var(--lime); padding-block: clamp(90px, 12vw, 170px); }
 .end__big { font-size: clamp(56px, 11vw, 190px); font-weight: 900; letter-spacing: -0.06em; line-height: .84; text-transform: uppercase; }
-.end__big--b { margin-top: .25em; }
+.end__big--b { margin-top: .25em; line-height: 1.04; }
 .end__big--b span { background: var(--ink); color: var(--lime); padding: 0 .06em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .end__sig { margin-top: 48px; }
 .end__sig a { text-decoration: none; border-bottom: 1px solid var(--ink); }
